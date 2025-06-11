@@ -1,0 +1,36 @@
+<body>
+    <div 
+  class="mensagem-flutuante" 
+  [ngClass]="{
+    'alerta': tipoMensagem === 'alerta',
+    'normal': tipoMensagem === 'normal'
+  }"
+  *ngIf="mostrarMensagem"
+>
+  {{ mensagemFlutuante }}
+</div>
+
+
+<div class="config-container">
+  <form [formGroup]="form" (ngSubmit)="alterarEmail()">
+    <label>
+      Novo E-mail:
+      <input type="email" formControlName="novoEmail" />
+    </label>
+
+    <label>
+      Senha Atual:
+      <input type="password" formControlName="senhaAtual" />
+    </label>
+
+    <button type="submit">Alterar E-mail</button>
+
+    <div class="inicio-link">
+    <a routerLink="/">
+        <span class="arrow-icon"></span> Voltar para Início</a>
+  </div>
+  </form>
+
+</div>
+
+</body>

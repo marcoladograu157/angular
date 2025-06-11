@@ -1,0 +1,12 @@
+<div style="max-width: 400px; margin: auto;">
+  <canvas baseChart
+          [data]="chartData"
+          [type]="chartType">
+  </canvas>
+
+  <div class="text-center mt-4">
+    <strong>
+      {{ totalVendas | currency:'BRL' }} de {{ metaMensal | currency:'BRL' }}
+    </strong>
+  </div>
+</div>

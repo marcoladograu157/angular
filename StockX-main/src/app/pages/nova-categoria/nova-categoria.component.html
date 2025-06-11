@@ -1,0 +1,24 @@
+<body>
+    
+
+<div class="container-nova-categoria">
+  <h2 class="titulo-nova-categoria">Nova Categoria</h2>
+
+  <div class="box-nova-categoria">
+    <div class="grupo-nova-categoria">
+      <label for="nomeCategoria">Nome da Categoria</label>
+      <input id="nomeCategoria" type="text" [(ngModel)]="nomeCategoria" />
+    </div>
+  </div>
+
+ <div class="acoes-nova-categoria">
+  <button (click)="salvarCategoria()" class="btn btn-primary">Salvar Categoria</button>
+  <button (click)="cancelar()" class="btn btn-secondary">Cancelar</button>
+</div>
+
+
+  <p *ngIf="mensagem" [class.mensagem-flutuante]="true" [class.alerta]="mensagem.includes('Erro')" [class.normal]="!mensagem.includes('Erro')">
+    {{ mensagem }}
+  </p>
+</div>
+</body>

@@ -1,0 +1,51 @@
+<body>
+  <div 
+    class="mensagem-flutuante" 
+    [ngClass]="{
+      'alerta': tipoMensagem === 'alerta',
+      'normal': tipoMensagem === 'normal'
+    }"
+    *ngIf="mostrarMensagem"
+  >
+    {{ mensagemFlutuante }}
+  </div>
+
+  <div class="config-container">
+    <h2 class="config-title">Configurações</h2>
+
+    <form [formGroup]="form" (ngSubmit)="salvarConfiguracoes()">
+      <div class="config-group">
+        <label for="nome">Nome</label>
+        <input id="nome" type="text" formControlName="nome" placeholder="Seu nome" />
+      </div>
+
+      <div class="config-group">
+        <label for="metaMensal">Meta mensal (R$)</label>
+        <input id="metaMensal" type="number" formControlName="metaMensal" />
+      </div>
+
+      <div class="config-group">
+        <label for="estoqueNotificacao">Notificar estoque abaixo de</label>
+        <input id="estoqueNotificacao" type="number" formControlName="estoqueNotificacao" />
+      </div>
+
+      <div class="config-group">
+        <label for="estoqueCritico">Estoque crítico (destacar em vermelho)</label>
+        <input id="estoqueCritico" type="number" formControlName="estoqueCritico" />
+      </div>
+
+      <button class="config-button" type="submit">Salvar Configurações</button>
+    </form>
+
+    <div class="config-actions">
+      <button class="config-button" (click)="irParaAlterarEmail()">Alterar E-mail</button>
+      <button class="config-button" (click)="enviarEmailTrocaSenha()">Redefinir Senha</button>
+
+      <div class="inicio-link">
+        <a routerLink="/">
+          <span class="arrow-icon"></span> Voltar para Início
+        </a>
+      </div>
+    </div>
+  </div>
+</body>

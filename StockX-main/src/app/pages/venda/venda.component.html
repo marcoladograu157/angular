@@ -1,0 +1,62 @@
+<div class="layout-container">
+  <aside class="sidebar">
+    <h2 class="logo">StockX</h2>
+    <nav>
+      <ul>
+        <li><button (click)="irParaProdutos()" class="link-estilo">Produtos</button></li>
+        <li><button (click)="abrirDashboard()" class="link-estilo">Dashboard</button></li>
+        <li><button (click)="irParaVendas()" class="link-estilo">Nova Venda</button></li>
+        <li><button (click)="irParaConfiguracoes()" class="link-estilo">Configurações</button></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <form [formGroup]="vendaForm" (ngSubmit)="finalizarVenda()">
+
+      <div formArrayName="itens">
+        <div *ngFor="let item of itens.controls; let i = index" [formGroupName]="i" class="item-bloco">
+          <label>Nome do Produto:</label>
+          <input type="text" formControlName="nome" placeholder="Digite ou selecione" />
+
+          <ul *ngIf="produtosFiltrados[i] | async as sugestoes">
+            <li *ngFor="let produto of sugestoes" (click)="selecionarProduto(produto, i)">
+              {{ produto.name }} - {{ produto.code || produto.id }}
+            </li>
+          </ul>
+
+          <label for="codigo">Código do produto</label>
+          <input type="text" formControlName="codigo" placeholder="Digite ou escaneie o código" />
+
+          <label>Quantidade:</label>
+          <input type="number" formControlName="quantidade" min="1" />
+
+          <label>Preço (R$):</label>
+          <input type="number" formControlName="preco" step="0.01" />
+
+          <label>Categoria:</label>
+          <input type="text" formControlName="categoria" />
+
+          <button type="button" (click)="removerItem(i)" *ngIf="itens.length > 1">Remover</button>
+          <hr />
+        </div>
+      </div>
+
+      <button type="button" (click)="adicionarItem()">+ Adicionar item</button>
+
+      <label>Forma de Pagamento:</label>
+      <select formControlName="formaPagamento">
+        <option value="">Selecione</option>
+        <option value="Pix">Pix</option>
+        <option value="Cartão">Cartão</option>
+        <option value="Dinheiro">Dinheiro</option>
+      </select>
+
+      <div class="resumo">
+        <p><strong>Total:</strong> R$ {{ calcularTotal() | number: '1.2-2' }}</p>
+      </div>
+
+      <button type="submit" [disabled]="vendaForm.invalid">Finalizar Venda</button>
+    </form>
+  </main>
+</div>

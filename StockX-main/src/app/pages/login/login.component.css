@@ -1,0 +1,173 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1e1e2f, #34344e);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeInBg 1.2s ease-out;
+}
+
+/* Login container com sombra e animação */
+.login-container {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  padding: 48px 36px;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 420px;
+  animation: fadeInCard 0.8s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 32px;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #ddd;
+}
+
+/* Campos de entrada */
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 1px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+  color: #ccc;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);
+}
+
+/* Botão com animação */
+.login-button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.5);
+}
+
+.login-button:active {
+  transform: scale(0.97);
+}
+
+/* Mensagem de erro */
+.error-message {
+  margin-top: 16px;
+  color: #ff5f5f;
+  text-align: center;
+  font-size: 14px;
+  animation: fadeInError 0.3s ease-out;
+}
+
+/* Animações */
+@keyframes fadeInBg {
+  from {
+    opacity: 0;
+    background-position: center;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeInError {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.register-link {
+  margin-top: 16px;
+  text-align: center;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.reset-password-link {
+  margin-top: 8px;
+  text-align: center;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.reset-password-link a {
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.reset-password-link a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}

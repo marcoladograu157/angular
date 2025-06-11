@@ -1,0 +1,99 @@
+  <body>
+    <div class="container">
+
+    <aside class="sidebar">
+      <h2 class="logo">StockX</h2>
+      <nav>
+        <ul>
+          <li><button (click)="irParaProdutos()" class="link-estilo">Produtos</button></li>
+          <li><button (click)="abrirDashboard()" class="link-estilo">Dashboard</button></li>
+          <li><button (click)="irParaVendas()" class="link-estilo">Nova Venda</button></li>
+          <li><button (click)="irParaConfiguracoes()" class="link-estilo">Configurações</button></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <app-navbar></app-navbar>
+      <h1>Bem-vindo(a) {{ nomeEmpresa }}</h1>
+
+      <div class="resumo">
+        <div class="resumo-card">
+          <h2>Total de Itens</h2>
+          <p>{{ resumo.totalItens }}</p>
+        </div>
+
+        <div class="resumo-card">
+          <h2>Valor Total em Estoque</h2>
+          <p>R$ {{ resumo.totalValor.toFixed(2) }}</p>
+        </div>
+      </div>
+<app-meta-mensal></app-meta-mensal>
+      <div 
+  class="mensagem-flutuante" 
+  [ngClass]="{
+    'alerta': tipoMensagem === 'alerta',
+    'normal': tipoMensagem === 'normal'
+  }"
+  *ngIf="mostrarMensagem"
+>
+  {{ mensagemFlutuante }}
+</div>
+
+<div *ngIf="mostrarConfirmacaoExcluir" class="confirmacao-flutuante-backdrop">
+  <div class="confirmacao-flutuante">
+    <p>Tem certeza que deseja excluir este produto?</p>
+    <button class="btn-sim" (click)="confirmarExclusao()">Sim</button>
+    <button class="btn-nao" (click)="cancelarExclusao()">Não</button>
+  </div>
+</div>
+
+     
+<div class="filtro-produto-wrapper">
+  <div class="filtro-produto-container">
+    <input
+      class="filtro-produto-input"
+      type="text"
+      placeholder="Filtrar produtos..."
+      [(ngModel)]="filtro"
+      (ngModelChange)="filtrarProdutos()"
+    />
+  </div>
+</div>
+
+
+
+      <!-- TABELA -->
+      <table class="tabela-produtos">
+        <thead>
+          <tr>
+            
+            <th>Code</th>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Preço (R$)</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of produtosFiltrados" [ngClass]="{'estoque-baixo': product.quantity <= 1}">
+            <td data-label="Code">{{ product.code }}</td>
+            <td data-label="Nome">{{ product.name }}</td>
+            <td data-label="Quantidade">{{ product.quantity }}</td>
+            <td data-label="Preço (R$)">{{ product.price.toFixed(2) }}</td>
+            <td data-label="Ações">
+              <button (click)="editarProduto(product)">Editar</button>
+              <button (click)="exibirConfirmacaoExcluir(product.id)">Excluir</button>
+
+            </td>
+          </tr>
+          <tr *ngIf="produtosFiltrados.length === 0" class="mensagem-vazia">
+  <td colspan="5">Nenhum produto com estoque baixo!</td>
+</tr>
+
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+</body>

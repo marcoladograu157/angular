@@ -1,0 +1,103 @@
+<div class="body">
+
+<!-- MENSAGEM FLUTUANTE -->
+<div *ngIf="mostrarMensagem"
+     class="mensagem-flutuante"
+     [ngClass]="tipoMensagem === 'alerta' ? 'mensagem-alerta' : 'mensagem-normal'"
+     role="alert"
+     aria-live="assertive">
+  {{ mensagemFlutuante }}
+</div>
+
+
+
+<!-- Caixa do Scanner -->
+<div *ngIf="mostrarScanner" class="scanner-box" style="margin-bottom: 20px;">
+  <p *ngIf="!hasPermission" class="mensagem-alerta">
+    Permissão para câmera não concedida.
+  </p>
+
+  <!-- Select para trocar a câmera -->
+ 
+
+
+  <zxing-scanner 
+  *ngIf="mostrarScanner"
+  #scanner
+  [device]="currentDevice"
+  [formats]="formats"
+  [enable]="scannerRunning"
+  (camerasFound)="camerasFound($event)"
+  (scanSuccess)="onCodeScanned($event)"
+  (permissionResponse)="onHasPermission($event)"
+  (scanError)="onScanError($event)"
+></zxing-scanner>
+
+<div *ngIf="mostrarScanner && !scannerRunning && hasPermission" class="scanner-loading">
+  <p>Iniciando scanner...</p>
+</div>
+</div>
+
+<!-- FORMULÁRIO -->
+<div class="container-form">
+  <h2 class="form-title">Novo Produto</h2>
+
+  <form (ngSubmit)="salvarProduto()" #form="ngForm" class="form-box" novalidate>
+
+    <!-- Nome -->
+    <div class="form-group">
+      <label for="name">Nome: *</label>
+      <input type="text" id="name" [(ngModel)]="produto.name" name="name" required />
+    </div>
+
+    <!-- Código e Scanner -->
+    <div class="form-group">
+      <label for="code">Código:</label>
+      <input type="text" id="code" [(ngModel)]="produto.code" name="code" />
+
+      <button type="button"
+              (click)="toggleScanner()"
+              class="btn btn-secondary"
+              style="margin-top:8px;"
+              aria-label="Alternar leitura de código de barras">
+        {{ mostrarScanner ? 'Fechar Scanner' : 'Ler Código de Barras' }}
+      </button>
+    
+
+
+    <!-- Quantidade -->
+    <div class="form-group">
+      <label for="quantity">Quantidade: *</label>
+      <input type="number" id="quantity" [(ngModel)]="produto.quantity" name="quantity" required min="0" />
+    </div>
+
+    <!-- Preço -->
+    <div class="form-group">
+      <label for="price">Preço (R$): *</label>
+      <input type="number" step="0.01" id="price" [(ngModel)]="produto.price" name="price" required min="0" />
+    </div>
+
+    <!-- Categoria -->
+    <div class="form-group">
+      <label for="category">Categoria:</label>
+      <select id="category" [(ngModel)]="produto.category" name="category">
+        <option value="" disabled selected>Selecione uma categoria</option>
+        <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+
+    <!-- Custo -->
+    <div class="form-group">
+      <label for="cost">Custo (R$): *</label>
+      <input type="number" step="0.01" id="cost" [(ngModel)]="produto.cost" name="cost" required min="0" />
+    </div>
+
+    <!-- Botões -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Salvar</button>
+      <button type="button" (click)="voltar()" class="btn btn-secondary">Cancelar</button>
+    </div>
+    </div>
+  </form>
+</div>
+</div>

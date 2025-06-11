@@ -1,0 +1,355 @@
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to right, #e3f2fd, #fce4ec);
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px 15px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.layout-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  font-family: 'Segoe UI', sans-serif;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 260px;
+  background-color: #1f2937;
+  color: #ffffff;
+  padding: 30px 20px;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.5s ease forwards;
+  z-index: 1000;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.sidebar .logo {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #60a5fa;
+  text-align: center;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  margin: 18px 0;
+}
+
+.sidebar nav ul li button.link-estilo {
+  all: unset; /* Reseta estilos padrões do botão */
+  color: #e5e7eb;
+  font-size: 18px;
+  font-weight: 600;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 100%;
+  text-align: left;
+}
+
+.sidebar nav ul li button.link-estilo:hover {
+  background-color: #374151;
+  transform: scale(1.05);
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  margin-left: 260px; /* Espaço para sidebar fixa */
+  padding: 40px;
+  background-color: #f4f6f8;
+  overflow-y: auto;
+}
+
+/* Form */
+form {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.item-bloco {
+  border: 1.5px solid #dee2e6;
+  border-radius: 12px;
+  padding: 20px 25px;
+  margin-bottom: 20px;
+  position: relative;
+  background: #f9fbff;
+  box-shadow: inset 0 0 8px #e0ebff;
+  transition: box-shadow 0.3s ease;
+}
+
+.item-bloco:hover {
+  box-shadow: 0 0 15px #7aa7ff;
+}
+
+.item-bloco label {
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 12px;
+  display: block;
+  color: #3a3a3a;
+}
+
+.item-bloco input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #ced4da;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-top: 6px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.item-bloco input:focus {
+  border-color: #4f7bff;
+  outline: none;
+  box-shadow: 0 0 8px #4f7bffaa;
+  background-color: #f0f5ff;
+  transition: background-color 0.3s ease;
+}
+
+/* Sugestões dropdown */
+.item-bloco ul {
+  list-style: none;
+  padding: 6px 12px;
+  margin: 8px 0 0 0;
+  background: #ffffff;
+  border: 1.5px solid #4f7bff;
+  border-radius: 0 0 12px 12px;
+  max-height: 120px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(79,123,255,0.25);
+  cursor: pointer;
+  user-select: none;
+  font-size: 15px;
+}
+
+.item-bloco ul li {
+  padding: 8px 6px;
+  border-bottom: 1px solid #dde6ff;
+  transition: background-color 0.2s ease;
+}
+
+.item-bloco ul li:last-child {
+  border-bottom: none;
+}
+
+.item-bloco ul li:hover {
+  background-color: #4f7bff33;
+  color: #0042c6;
+}
+
+/* Botão remover item */
+.item-bloco button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #ff5c5c;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+}
+
+.item-bloco button:hover {
+  background-color: #e04747;
+  transform: scale(1.05);
+}
+
+/* Botão adicionar item */
+form > button[type="button"] {
+  background-color: #007bff;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 250px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+form > button[type="button"]:hover {
+  background-color: #0056b3;
+  box-shadow: 0 6px 12px #0056b333;
+}
+
+/* Select */
+select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  border: 2px solid #ced4da;
+  font-size: 16px;
+  font-weight: 600;
+  transition: border-color 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: white;
+}
+
+select:focus {
+  outline: none;
+  border-color: #4f7bff;
+  box-shadow: 0 0 8px #4f7bffaa;
+}
+
+/* Resumo total */
+.resumo {
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 30px;
+  text-align: right;
+  color: #333;
+}
+
+/* Botão submit */
+button[type="submit"] {
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 16px 0;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background-color: #1e7e34;
+}
+
+button[type="submit"]:disabled {
+  background-color: #94d3a2;
+  cursor: not-allowed;
+}
+
+
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column;
+    padding-bottom: 60px; /* espaço para o menu no rodapé */
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px 15px;
+  }
+
+  form {
+    width: 100%;
+    padding: 20px 15px;
+    box-sizing: border-box;
+  }
+
+  .item-bloco {
+    padding: 14px;
+    font-size: 14px;
+  }
+
+  .item-bloco label {
+    font-size: 13px;
+  }
+
+  .item-bloco input,
+  select {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  button[type="submit"],
+  form > button[type="button"] {
+    font-size: 15px;
+    padding: 12px 16px;
+    width: 100%;
+  }
+
+  .resumo {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  /* Sidebar como barra inferior */
+  .sidebar {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .sidebar .logo {
+    display: none;
+  }
+
+  .sidebar nav ul {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidebar nav ul li {
+    margin: 0;
+  }
+
+  .sidebar nav ul li button.link-estilo {
+    font-size: 14px;
+    padding: 10px 6px;
+    text-align: center;
+    width: 100%;
+  }
+}
